@@ -37,7 +37,7 @@ async function getPost(postID) {
         ORDER BY bp.id ASC;
     `, [postID]);
 
-    return rows;
+    return rows[0] || null;
 }
 
 async function addNewPost(title, postText, userID, isPosted) {
@@ -47,25 +47,31 @@ async function addNewPost(title, postText, userID, isPosted) {
         RETURNING id;
     `, [title, postText, userID, isPosted]);
     
-    return rows[0];
+    return rows[0] || null;
 }
 
 async function editPost(postID, title, postText, isPosted) {
-    await pool.query(`
+    const {rows} = await pool.query(`
         UPDATE blog_posts
         SET title = $2,
             post_text = $3,
             updated_at = NOW(),
             is_posted = $4
-        WHERE id = $1;
+        WHERE id = $1
+        RETURNING id;
     `, [postID, title, postText, isPosted]);
+
+    return rows[0] || null;
 }
 
 async function deletePost(postID) {
-    await pool.query(`
+    const {rows} = await pool.query(`
         DELETE FROM blog_posts
-        WHERE id = $1;
-    `, [postID])
+        WHERE id = $1
+        RETURNING id;
+    `, [postID]);
+
+    return rows[0] || null;
 }
 
 async function deleteAllComments(postID) {
@@ -115,10 +121,12 @@ async function addComment(commentText, postID, userID) {
 }
 
 async function deleteComment(commentID) {
-    await pool.query(`
+    const {rows} = await pool.query(`
         DELETE FROM post_comments
         WHERE id = $1;    
     `, [commentID]);
+
+    return rows[0] || null;
 }
 
 module.exports = {
