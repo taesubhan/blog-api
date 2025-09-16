@@ -1,13 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+const {authRouter} = require('./routes/authenticationRouter');
 const {postRouter} = require('./routes/postRouter');
 const {catchErrors} = require('./errors/errorHandler');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/api', postRouter);
+app.use('/api/authentication', authRouter);
+app.use('/api/posts', postRouter);
 
 app.use(catchErrors);
 

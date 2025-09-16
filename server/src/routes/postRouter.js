@@ -1,18 +1,19 @@
 const {Router} = require('express');
 const postRouter = Router();
 
-const db = require('../database/query.js');
+const db = require('../database/query/postQuery.js');
 const {CustomNotFoundError, CustomInternalServerError} = require('../errors/errorHandler.js');
+const {tokenVerify} = require('../controllers/authenticationController.js');
 
 // route: /api/posts
 
-postRouter.get('/posts', async (req, res) => {
+postRouter.get('/', async (req, res) => {
     const postList = await db.getAllPosts();
     
     res.json(postList);
 });
 
-postRouter.get('/posts/:postID', async (req, res) => {
+postRouter.get('/:postID', async (req, res) => {
     const {postID} = req.params;
     const post = await db.getPost(postID);
     
@@ -24,7 +25,7 @@ postRouter.get('/posts/:postID', async (req, res) => {
     res.json(post);
 });
 
-postRouter.put('/posts/:postID', async (req, res) => {
+postRouter.put('/:postID', tokenVerify, async (req, res) => {
     const {postID} = req.params;
     const {title, postText, isPosted} = req.body;
     const updatedPostID = await db.editPost(postID, title, postText, isPosted);
@@ -34,7 +35,7 @@ postRouter.put('/posts/:postID', async (req, res) => {
     res.json(req.body);
 })
 
-postRouter.post('/posts', async (req, res) => {
+postRouter.post('/', tokenVerify, async (req, res) => {
     const {title, postText, userID, isPosted} = req.body;
     const newPostID = await db.addNewPost(title, postText, userID, isPosted);
     if (!newPostID) {
@@ -46,7 +47,7 @@ postRouter.post('/posts', async (req, res) => {
     });
 });
 
-postRouter.delete('/posts/:postID', async (req, res) => {
+postRouter.delete('/:postID', tokenVerify, async (req, res) => {
     const {postID} = req.params;
     const deletedPostID = await db.deletePostsWithComments(postID);
     if (!deletedPostID) {
@@ -55,7 +56,7 @@ postRouter.delete('/posts/:postID', async (req, res) => {
     res.json({post_id: postID});
 })
 
-postRouter.get('/posts/:postID/comments', async (req, res) => {
+postRouter.get('/:postID/comments', async (req, res) => {
     const {postID} = req.params;
     const isPostInDB = db.getPost(postID);
     if (!isPostInDB) {
@@ -66,7 +67,7 @@ postRouter.get('/posts/:postID/comments', async (req, res) => {
     res.json(commentsList);
 });
 
-postRouter.post('/posts/:postID/comments', async (req, res) => {
+postRouter.post('/:postID/comments', tokenVerify, async (req, res) => {
     const {postID} = req.params;
     const isPostInDB = db.getPost(postID);
     if (!isPostInDB) {
@@ -80,7 +81,7 @@ postRouter.post('/posts/:postID/comments', async (req, res) => {
     });
 })
 
-postRouter.delete('/comments/:commentID', async (req, res) => {
+postRouter.delete('/comments/:commentID', tokenVerify, async (req, res) => {
     const {commentID} = req.params;
     const deletedCommentID = await db.deleteComment(commentID);
     if (!deletedCommentID) {
