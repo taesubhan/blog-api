@@ -18,7 +18,6 @@ function tokenVerify(req, res, next) {
     try {
         const decodedUser = jwt.verify(token, process.env.JWT_SECRET_KEY);
         req.user = decodedUser;
-        console.log('token verified!')
         next();
     } catch(err) {
         throw new CustomAuthenticationError('Invalid or expired token');
@@ -71,7 +70,12 @@ async function login(req, res) {
     ,process.env.JWT_SECRET_KEY
     ,{expiresIn: tokenExpiresIn})
 
-    res.json({message: 'successfully logged in!', token});
+    res.json({
+        message: 'successfully logged in!', 
+        token,
+        username: user.username,
+        userID: user.id
+    });
 }
 
 module.exports = {

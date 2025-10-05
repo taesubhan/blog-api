@@ -15,8 +15,5 @@
   "bugs": {
     "url": "https://github.com/taesubhan/blog-api/issues"
   },
-  "homepage": "https://github.com/taesubhan/blog-api#readme",
-  "dependencies": {
-    "dotenv": "^17.2.2"
-  }
+  "homepage": "https://github.com/taesubhan/blog-api#readme"
 }

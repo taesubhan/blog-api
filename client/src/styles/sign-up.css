@@ -1,0 +1,82 @@
+/* body {
+  display: flex;
+  justify-content: center;
+} */
+/* 
+body {
+  width: 100%;
+} */
+
+
+
+/* SignUpPage container */
+.authenticationContainer {
+  max-width: 400px;
+  margin: 50px auto;       /* Center the form vertically with some spacing */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+/* Page title */
+.authenticationTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+  
+/* Form */
+.authenticationForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.formLabel {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Inputs */
+.formInput {
+  padding: 8px 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Input focus effect */
+.formInput:focus {
+  border-color: #007BFF;
+  outline: none;
+  box-shadow: 0 0 3px rgba(0,123,255,0.5);
+}
+
+.formButton {
+  padding: 10px;
+  background-color: #007BFF;
+  color: #fff;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /* transition: background 0.2s; */
+}
+
+.formButton:hover {
+  background-color: #0056b3;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.authLink {
+  display: flex;
+  justify-content: center;
+}

@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* width: 100%; */
+    background: #f4f4f4;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ccc;
+}
+
+.menuItems {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.settings {
+    display: flex;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.logoItem {
+    font-weight: bold;
+    font-size: 18px;
+}
+    

@@ -1,0 +1,63 @@
+/* .homePage {
+    height: 100%;
+}
+
+.blogPostsContainer {
+    display: grid;
+}
+
+.postContainer {
+    border: 1px solid black;
+} */
+
+
+
+
+
+/* Home page */
+.homePage {
+flex: 1;
+padding: 20px;
+}
+
+.blogPostsContainer {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.postContainer {
+border: 1px solid #ddd;
+border-radius: 4px;
+padding: 12px;
+background: #fff;
+cursor: pointer;
+}
+
+.postTitle {
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.postAuthor {
+font-size: 14px;
+color: #555;
+margin-bottom: 8px;
+}
+
+.postTextCutOut {
+font-size: 14px;
+color: #333;
+}
+
+/* Loading & error */
+.loadingScreen,
+.errorScreen {
+text-align: center;
+padding: 20px;
+font-weight: bold;
+}
+
+.errorScreen {
+color: red;
+}
