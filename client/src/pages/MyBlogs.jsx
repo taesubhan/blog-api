@@ -3,17 +3,16 @@ import Header from '../components/Header.jsx';
 import Footer from '../components/Footer.jsx';
 
 
+function MyBlogsPage() {
+    const userID = localStorage.getItem('userID');
 
-
-
-function HomePage() {
     return (
         <div className="container">
             <Header />
-            <BlogPostsList />
+            <BlogPostsList userID={userID}/>
             <Footer />
         </div>
     )
 }
 
-export default HomePage;
+export default MyBlogsPage;

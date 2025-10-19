@@ -7,7 +7,8 @@ authRouter.post('/sign-up', signUp);
 authRouter.post('/login', login);
 authRouter.get('/verify', tokenVerify, (req, res) => {
     res.json({
-        verified: true
+        verified: true,
+        user: req.user
     });
 });
 

@@ -1,8 +1,8 @@
 const pool = require('../pool');
 
 // async function 
-async function getAllPosts() {
-    const {rows} = await pool.query(`
+async function getAllPosts(userID=null, search=null) {
+    let query = `
         SELECT
         bp.id
         ,bp.title
@@ -14,9 +14,23 @@ async function getAllPosts() {
         FROM blog_posts bp
         LEFT JOIN users u
             ON bp.user_id = u.id
-        ORDER BY bp.id asc;
-    `);
+        WHERE 1=1
+    `
+    let paramCounter = 1;
+    const params = [];
+    if (userID) {
+        query += ` AND bp.user_id = $${paramCounter}`;
+        params.push(userID);
+        paramCounter++;
+    }
+    if (search) {
+        query += ` AND (bp.title ILIKE '%' || $${paramCounter} || '%' OR u.fullname ILIKE '%' || $${paramCounter} || '%')`;
+        params.push(search);
+    }
 
+    query += ' ORDER BY bp.id asc';
+
+    const {rows} = await pool.query(query, params);
     return rows;
 }
 
@@ -30,6 +44,7 @@ async function getPost(postID) {
         ,bp.updated_at
         ,bp.is_posted
         ,u.fullname AS author
+        ,u.id AS author_id
         FROM blog_posts bp
         LEFT JOIN users u
             ON bp.user_id = u.id
@@ -82,15 +97,17 @@ async function deleteAllComments(postID) {
 }
 
 async function deletePostsWithComments(postID) {
+    let result;
     try {
         await pool.query(`BEGIN;`);
-        await deletePost(postID);
+        result = await deletePost(postID);
         await deleteAllComments(postID);
         await pool.query(`COMMIT;`);
     } catch(err) {
         await pool.query(`ROLLBACK;`);
         throw new Error(err);
     }
+    return result;
 }
 
 async function getAllComments(postID) {
@@ -123,7 +140,8 @@ async function addComment(commentText, postID, userID) {
 async function deleteComment(commentID) {
     const {rows} = await pool.query(`
         DELETE FROM post_comments
-        WHERE id = $1;    
+        WHERE id = $1
+        RETURNING id;    
     `, [commentID]);
 
     return rows[0] || null;

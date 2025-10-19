@@ -2,8 +2,9 @@ const db = require('../database/query/postQuery.js');
 const {CustomNotFoundError, CustomInternalServerError} = require('../errors/errorHandler.js');
 
 async function getAllPosts(req, res) {
-    const postList = await db.getAllPosts();
-    
+    const {userid, search} = req.query;
+    // console.log(search);
+    const postList = await db.getAllPosts(userid, search);
     res.json(postList);
 }
 

@@ -10,18 +10,33 @@
 
 .menuItems {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+}
+
+.menuLink {
+    color: black;
+    font-weight: bold;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.menuLink:hover {
+    color: rgb(255, 97, 11);
+    text-decoration: underline;
+    
 }
 
 .settings {
     display: flex;
-    gap: 20px;
+    gap: 30px;
+}
+
+.settingsButton {
+    width: 25px;
     cursor: pointer;
 }
 
-.logoItem {
-    font-weight: bold;
-    font-size: 18px;
+.logoImage {
+    max-width: 50px;
 }
     

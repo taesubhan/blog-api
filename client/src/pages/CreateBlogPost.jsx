@@ -10,17 +10,15 @@ const apiURL = import.meta.env.VITE_API_URL + '/posts';
 
 
 function CreateBlogPostPage() {
-    // const [formData, setFormData] = useState(null);
-    // const {isAuth, error, loading, result} = usePostFetch(apiURL, formData, enabled);
     const {result, error, loading, fetchAPI} = usePostFetch(apiURL, false);
 
-    function handleCreateNewPost(e) {
+    async function handleCreateNewPost(e) {
         e.preventDefault();
         const formData = new FormData(e.target);
         const form = Object.fromEntries(formData.entries());
         form.userID = localStorage.getItem('userID');
         form.isPosted = true;
-        fetchAPI(form);
+        await fetchAPI(form);
         e.target.reset();
     }
 
@@ -28,23 +26,23 @@ function CreateBlogPostPage() {
     if (error) return <div className="error">{error}</div>
     if (result) return (
         <div className="postedSuccess">
-            <div>Successfully submitted blog post</div>
-            <Link to={`/blog/${result.post_id}`}>Go to blog</Link>
+            <div>Successfully Created Post!</div>
+            <Link to={`/blog/${result.post_id}`}>Go To Blog</Link>
         </div>
     )
     return (
         <div className="container">
             <Header />
-            <div className="title">Create Blog Post</div>
-            <form className="createNewBlogForm" onSubmit={handleCreateNewPost}>
-                <label htmlFor="blogTitle">Title: </label>
-                <input type="text" id="blogTitle" name="title"/>
-
-                <label htmlFor="postText">Blog: </label>
-                <textarea name="postText" id="postText"></textarea>
-
-                <button type="submit">Create Post</button>
-            </form>
+            <div className="createNewBlog blogFormContainer">
+                <div className="title">Create Blog Post</div>
+                <form className="createNewBlogForm blogForm" onSubmit={handleCreateNewPost}>
+                    <label htmlFor="blogTitle">Title: </label>
+                    <input type="text" id="blogTitle" name="title"/>
+                    <label htmlFor="postText">Blog: </label>
+                    <textarea name="postText" id="postText"></textarea>
+                    <button type="submit">Create Post</button>
+                </form>
+            </div>
             <Footer />
         </div>
     )

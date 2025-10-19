@@ -61,8 +61,10 @@ function SignUpForm({setIsSignedUp}) {
                 <button type="submit" className="formButton">Sign Up</button>
             </form>
 
-            <div className="authLink">
-                <Link to='/login' className="loginLink">Login</Link>
+            <div className="loginLinks">
+                <div className="authLink">
+                    <Link to='/login' className="loginLink">Login</Link>
+                </div>
             </div>
         </div>
     )
