@@ -5,7 +5,6 @@ import {useNavigate} from 'react-router-dom';
 
 const summaryCharCutoff = 30;
 
-
 function BlogPostsList({userID}) {
     const [searchText, setSearchText] = useState(null);
     const {posts, error, loading} = useGetPosts({userID, searchText}, true, searchText);

@@ -32,7 +32,6 @@ function useFetch(customFetch, auto=true, dep) {
                 }
             } catch(err) {
                 setError(err);
-                // setError(err.response.data.error_message);
             } finally {
                 setLoading(false);
             }
@@ -57,7 +56,6 @@ function useFetch(customFetch, auto=true, dep) {
 
 export function usePostFetch(apiURL, auto=false) {
     const {token} = useAuthContext();
-    // if (!formData) return {isAuth: true, error: null, loading: false, result: null, fetchAPI: null};
     const customFetch = async (formData) => {
         const config = getConfig(token);
         return await axios.post(apiURL, formData, config);
@@ -88,27 +86,6 @@ export function useAuthenticate(dep=null) {
     const {isAuth, error, loading , result, fetchAPI} = useFetch(customFetch, true, dep);
     return {isAuth, error, loading, result, fetchAPI};
 }
-
-// export function useAuthVerify(dep=null) {
-//     const customFetch = async (token) => {
-//         const apiAuthURL = apiURL + '/authentication/verify';
-//         return await axios.get(apiAuthURL, config);
-//     }
-
-//     const {isAuth, error, loading , result, fetchAPI} = useFetch(customFetch, true, dep);
-//     return {isAuth, error, loading, result, fetchAPI};
-// }
-
-// export function useAuthLogIn() {
-//     const result = 
-//     const customFetch = async () => {
-//         const apiAuthURL = apiURL + '/authentication/verify';
-//         return await await axios.post(apiURL, loginInput, config);
-//     }
-
-//     const {isAuth, error, loading , result, fetchAPI} = useFetch(customFetch, true, dep);
-//     return {isAuth, error, loading, result, fetchAPI};
-// }
 
 function filterAPI(filter) {
     const {postID, userID, searchText} = filter;
