@@ -5,6 +5,7 @@ async function getAllPosts(req, res) {
     const {userid, search} = req.query;
     // console.log(search);
     const postList = await db.getAllPosts(userid, search);
+    console.log('allposts', postList);
     res.json(postList);
 }
 
