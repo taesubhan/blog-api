@@ -33,6 +33,7 @@
 
 .blogForm input[type="text"],
 .blogForm textarea {
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
     font-size: 1rem;
     padding: 0.75rem;
     border: 1px solid #ccc;

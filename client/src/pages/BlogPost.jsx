@@ -84,8 +84,8 @@ function BlogPostPage() {
         navigate(`/blog/${postID}/edit`);
     }
 
-    function handleDelete() {
-        deletePost(postID);
+    async function handleDelete() {
+        await deletePost(postID);
         navigate(`/home`);
     }
 
