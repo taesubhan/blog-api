@@ -1,8 +1,8 @@
 const {Pool} = require('pg');
 
-console.log(process.env.DEV_DATABASE_CONNECTION_STRING);
+const isProd = process.env.NODE_ENV === 'production';
 
 // Add PROD later
 module.exports = new Pool({
-    connectionString: process.env.DEV_DATABASE_CONNECTION_STRING
+    connectionString: isProd ? process.env.PROD_DATABASE_CONNECTION_STRING : process.env.DEV_DATABASE_CONNECTION_STRING
 })

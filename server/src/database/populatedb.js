@@ -35,12 +35,12 @@ VALUES ('John Doe', 'johndoe', 'password');
 -- Insert blog post (user_id = 1 because John Doe is first user)
 INSERT INTO blog_posts (title, post_text, user_id, created_at, updated_at, is_posted)
 VALUES 
-('First Blog Post', 'Hello everyone, this is my very first blog post... Signing off now!', 1, '2025-09-08 18:00:00', '2025-09-08 18:00:00', true);
+('First Blog Post', 'Hello everyone, this is my very first blog post... Hope you like it!', 1, '2025-10-19 10:00:00', '2025-10-19 10:00:00', true);
 
 -- Insert a comment
-INSERT INTO post_comments (comment_text, post_id, user_id, created_at)
-VALUES
-('Hey this is my first comment', 1, 1, '2025-09-08 18:05:00');
+--INSERT INTO post_comments (comment_text, post_id, user_id, created_at)
+--VALUES
+--('Hey this is my first comment', 1, 1, '2025-10-19 18:05:00');
 
 `
 
@@ -48,7 +48,7 @@ VALUES
 async function main() {
     console.log('seeding...');
     const client = new Client({
-        connectionString: process.env.DEV_DATABASE_CONNECTION_STRING
+        connectionString: process.env.PROD_DATABASE_CONNECTION_STRING
     });
     await client.connect();
     await client.query(SQL);
