@@ -23,10 +23,7 @@ function LoginForm() {
             const result = await axios.post(apiURL, loginInput, config);
             if (result.status === 200) {
                 setErrorMessage(null);
-                // localStorage.setItem('Authorization', result.data.token);
-                // localStorage.setItem('userID', result.data.userID);
                 login(result.data.token, result.data.userID)
-                // window.location.href = '/home';
                 navigate('/home');
             }
 
