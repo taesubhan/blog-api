@@ -17,12 +17,12 @@ Link: https://taesh-blog.netlify.app/
 ### Frontend (React)
 - Built with React.js for fast rendering and modular structure  
 - Protected routes using React Router DOM and JWT authentication  
-- Responsive UI for creating, editing, and viewing blog posts and comments 
+- Responsive UI for creating, editing, and viewing blog posts
 - Dynamic components and API integration with fetch/axios
 - State management using React hooks
 
 ## Learning Highlights
 - Practiced RESTful API design and secure client-server communication
 - Strengthened understanding of React hooks, state management, and async API calls
-- Practiced creating, designing, and retrieving data from PostgreSQL database for blog post relationships
+- Practiced creating, designing, and retrieving data from PostgreSQL database for blog post relationships in Node.js
 - Learned JWT-based authentication across both frontend and backend
