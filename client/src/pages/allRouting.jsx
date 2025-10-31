@@ -11,7 +11,7 @@ import MyBlogsPage from './MyBlogs.jsx';
 const router = createBrowserRouter([
     {
       path: '/',
-      element: <Login />
+      element: <Home />
     },
     {
       path: 'signup',
